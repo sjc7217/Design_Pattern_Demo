@@ -31,10 +31,9 @@ public:
 		this->server = new RealServer;
 	}
 
-	// 和 真正主题类实现共同的接口，对外可以提供一致的接口！
+	//和真正主题类实现共同的接口，对外可以提供一致的接口！
 	void Request() {
-        PreRequest();
-
+		PreRequest();
 		if (!CheckUser()) {
 			cout << "Username or password error..." << endl;
 			return;
@@ -42,22 +41,22 @@ public:
 
 		cout << "Request success..." << endl;
 		this->server->Request();
-        
+
 		PostRequest();
 	}
 private:
-	//访问服务器前 进行的动作，可以控制对真实主题类的访问
+	//访问服务器前进行的动作，可以控制对真实主题类的访问
 	bool CheckUser() {
 		if ("admin" == this->name && "123456" == this->pwd) {
 			return true;
 		}
 		return false;
 	}
-	//真正访问服务器前 进行的动作，这里进行安全
+	//真正访问服务器前进行的动作，这里进行安全
 	void PreRequest() {
 		cout << "Entering server..." << endl;
 	}
-	//访问服务器之后 进行的动作
+	//访问服务器之后进行的动作
 	void PostRequest() {
 		cout << "Leaving server..." << endl;
 	}
@@ -68,9 +67,9 @@ private:
 };
 
 
-//客户端 通过登录代理服务器 访问 真实服务器
+//客户端通过登录代理服务器访问真实服务器
 int main(int argc, char **argv) {
 	AbstractServer *proxy = new ProxyServer("admin", "123456");//登录代理服务器
-	proxy->Request();//通过代理服务器 访问真正服务器
+	proxy->Request();//通过代理服务器访问真正服务器
 	return 0;
 }
